@@ -1,0 +1,23 @@
+Departement:
+- mettre les noms des départements
+- dans "edit", limiter à 101 le nombre de départements.
+
+Catégorie:
+- associer une image de la catégorie.
+
+Client:
+- ne pas afficher les MDP.
+
+Contenir:
+- supprimer la vue.
+
+Definir:
+- definir devient tarif.
+
+Gestionnaire:
+- dans "modifier", le profil indiqué doit correspondre à la ligne saisie (le profil).
+- pour modifier, cacher le MDP.
+- pour créer, ou saisir un MDP ou, MDP par défaut.
+
+ 
+ 

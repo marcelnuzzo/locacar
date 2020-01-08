@@ -1,0 +1,67 @@
+body {
+	border : 1px solid #AAA;
+	margin:20px;
+	padding : 20px;
+	font-family: "Verdana";
+}
+input[type=number]{
+    width: 35px;
+} 
+header {
+	border : 1px solid #789;
+	padding : 10px;
+	background-color : cyan;
+}
+
+.special {
+	display: inline-block;
+	width: 200px;
+}
+
+img {
+	float : left;
+	margin-right:20px;
+}
+footer {
+	text-align : center;
+	font-size : 12px;
+	font-style: italic;
+}
+
+table, th, td, caption {
+	border : 1px solid #789;
+	padding : 10px;
+}
+
+nav {
+	background-color:rgb(245,230,249);
+	padding:10px;
+}
+
+nav li {
+	display:inline;
+	border:1px solid #000;
+	margin:10px;
+	font-weight: bold;
+}
+
+nav li:hover {
+	background-color: #ebff81;
+}
+
+.menusel {
+	background-color: #d7dfff;
+}
+
+nav li a {
+	text-decoration: none;
+	padding:10px;
+}
+
+nav li a:hover {
+	color:#FFF;
+}
+
+.espace {
+	margin-left: 50%;
+}

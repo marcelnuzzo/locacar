@@ -1,0 +1,79 @@
+<MLD>
+	
+	departement
+	- dep_id (PK)
+	- dep_code
+	- dep_nom
+	
+	agence
+	- age_id (PK)
+	- age_nom
+	- age_adresse
+	- age_departement (FK)
+	
+	gestionnaire
+	- ges_id (PK)
+	- ges_nom
+	- ges_prenom
+	- ges_mail
+	- ges_mdp
+	- ges_profil
+	- ges_agence (fk)
+	
+	vehicule
+	- veh_id (PK)
+	- veh_marque
+	- veh_immatriculation
+	- veh_agence (FK)
+	- veh_categorie (FK)
+	
+	client
+	- cli_id (PK)
+	- cli_nom
+	- cli_prenom
+	- cli_adresse
+	- cli_mail
+	- cli_mdp
+	
+	location
+	- loc_id (PK)
+	- loc_date_debut
+	- loc_date_fin
+	- loc_age_depart (FK)
+	- loc_age_arrivee (FK)
+	- loc_statut
+	- loc_client (FK)
+	- loc_gestionnaire (FK)
+	- loc_categorie (FK)
+	- loc_vehicule (FK)
+
+	
+	categorie
+	- cat_id (PK)
+	- cat_nom
+	
+	options
+	- opt_id (PK)
+	- opt_nom
+	- opt_prix
+	
+	plage_horaire
+	- pla_id (PK)
+	- pla_hmin
+	- pla_hmax
+	
+	definir
+	- def_id (PK)
+	- def_thj
+	- def_pla (FK)
+	- def_categorie (FK)
+	
+	contenir
+	- con_id (PK)
+	- con_options (FK)
+	- con_location (FK)
+	
+	</MLD>
+	
+	
+	

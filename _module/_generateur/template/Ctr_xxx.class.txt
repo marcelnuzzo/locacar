@@ -1,0 +1,47 @@
+<?php
+
+class Ctr_[nomTable] extends Ctr_controleur {
+
+    public function __construct($action) {
+        parent::__construct("[nomTable]", $action);
+        $this->table="[nomTable]";
+        $this->classTable = "[nomClasse]";
+        $this->cle = "[nomCle]";
+        $a = "a_$action";
+        $this->$a();
+    }
+
+	function a_index() {
+		$result=[nomClasse]::selectAll("[nomTable]");
+		require $this->gabarit;
+	}
+	
+	//$_GET["id"] : id de l'enregistrement
+	function a_edit() {
+		$id = isset($_GET["id"]) ? $_GET["id"] : 0;
+		$u=new [nomClasse]($id);
+		extract($u->data);	
+		require $this->gabarit;
+	}
+
+	//$_POST : enregistrement à sauver
+	function a_save() {
+		if (isset($_POST["btSubmit"])) {
+			$u=new [nomClasse]();
+			$u->chargerDepuisTableau($_POST);
+			$u->sauver();
+		}
+		
+		header("location:index.php?m=[nomTable]");
+	}
+
+	//param GET id 
+	function a_del() {
+		if (isset($_GET["id"])) {
+			[nomClasse]::supprimer("[nomTable]","[nomCle]",$_GET["id"]);
+		}
+		header("location:index.php?m=[nomTable]");
+	}
+}
+
+?>

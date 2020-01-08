@@ -1,0 +1,89 @@
+Projet Locacar
+
+Liste des différentes fonctionnalités
+
+I. Profil administrateur
+
+1. Le CRUD
+
+A. Gestion des départements:
+• Création, mise à jour et suppression des agences
+- se renseigner pour automatiser cette tâche
+• Consultation des départements:
+- implémentation de la fonction/classe ajax
+- reprendre une carte google map pour situer les départements
+
+B. Gestion des agences:
+• Création, mise à jour et suppression des agences:
+- autocomplétion pour les départements (ajax)
+• Consultation des agences:
+- possiblité de trier (par département)
+- afficher: nom département
+
+C. Gestion des agents:
+• Création, mise à jour et suppression des agnets:
+- rajouter confirmation du mdp
+- fonction php pour la validation du  mail 
+- masquer le mdp/confirmation du mdp
+- pour choisir le profil, mettre des boutons radios
+• Consultation des agents:
+- possiblité de trier (par agence, par département);
+
+D. Gestion des véhicules:
+• Création, mise à jour et suppression des véhicules:
+- liste déroulante (pour les agences, les catégories)
+• Consultation des véhicules:
+- possiblité de trier (par marque, par catégorie, par agence, selon les disponibilités);
+- afficher: nom catégorie; nom de l'agence.
+
+E. Gestion des clients:
+• Création, mise à jour et suppression des clients:
+- rajouter confirmation du mdp
+- fonction php pour validation du mail 
+- masquer le mdp/confirmation du mdp
+• Consultation des clients:
+- historique des trajets par clients 
+
+
+F. Gestion des locations:
+• Création, mise à jour et suppression des locations:
+- sélecteur de dates (pour le départ/arrivée), 
+- liste déroulante ou des boutons radios (à déterminer) pour le statut de la demande 
+- fonction ajax pour les clients, les agents, les vérhicules
+- liste déroulante pour chosir les options (avec le prix associé)
+- rajouter une fonction javascript pour rajouter des options supplémentaires 
+• Consultation des locations:
+- afficher correctement: les dates, nom de l'agence (pour le départ/l'arrivée), nom+prenom du client, nom+prenom de l'agent, nom du véhicule,
+
+G. Gestion des catégories:
+• Création, mise à jour et suppression des catégories
+• Consultation des catégories:
+- possiblité en plus du nom des catégroies de rajouter le tarif correspondant
+- afficher la liste des voitures qui appartiennent à la catégorie correspondante (bouton collapse)
+
+
+H. Gestion des options:
+• Création, mise à jour et suppression des options
+- pour le prix de l'option, mettre un input type number
+- si le prix n'est pas indiqué, mettre une alert javascript pour prévenir l'utilisateur
+• Consultation des options:
+- liste des véhicules qui ont fait l'objet d'une deomande d'options
+
+
+G. Gestion des plages horaires/définir/catégorie
+• Création, mise à jour et suppression des plages horaires
+- mettre un sélecteur timer (pour le début et la fin de la plage horaire)
+- pour le tarif horaire journalier mettre un input type number
+- si le prix n'est pas indiqué, mettre une alert javascript pour prévenir l'utilisateur
+• Consultation de paramètres:
+- possiblité d'afficher: nom catégorie, plage horaire
+
+
+2. Fonctionnalités annexes:
+• Calcul du chiffre d’affaire annuel (en totalité, par agnece, par département)
+• Nombre de location pour diverses durées.
+• Calcul du chiffre d’affaire annuel.
+• Compteur pour évaluer le nombre de location prise par un agent et/ou un client
+Élement pour établir la facture: 
+• toutes les données utiles à l’établissement de la facture et au calcul du coût de chaque location
+

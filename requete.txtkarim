@@ -1,0 +1,100 @@
+﻿Liste des agences avec le nombre de véhicules présents.
+select agc_id,agc_nom,count(veh_id) from agence,vehicule where veh_agence=agc_id group by agc_id
+
+Liste des véhicules par agence.
+select agc_id,agc_nom,veh_id,veh_immatriculation from vehicule,agence where veh_agence=agc_id order by agc_id
+
+Liste des locations par statut pour une agence donnée.
+select agc_nom,loc_statut,loc_id from location,agence where loc_agc_depart=agc_id and  loc_agc_depart=15 order by loc_statut
+
+Liste des locations entre 2 dates données pour une agence donnée.
+select loc_id,loc_date_debut,loc_date_fin, loc_agc_depart from location,agence where loc_agc_depart=agc_id and loc_agc_depart=15 and loc_date_debut>"2019-01-01 00:00:00"   and loc_date_fin<"2019-12-30"
+
+Nombre de locations par agence et par statut.
+select loc_statut,agc_nom,count(loc_id) from location,agence where loc_agc_depart=agc_id group by loc_statut,agc_nom
+
+Liste des agences par département.
+select dep_code,agc_id,agc_nom from departement,agence where dep_id=agc_departement order by dep_code
+
+Chiffre d'affaire d'une agence donnée.
+select agc_id,agc_nom, loc_statut="Validé"
+à revoir
+
+Requête donnant la durée (en nombre d'heures) d'une location.
+select loc_id,timestampdiff(hour,loc_date_debut,loc_date_fin) durée_loc_heure  from location	where loc_id=1
+
+Liste les véhicules libres dans une agence donnée et entre deux dates données. 
+select veh_id from vehicule where veh_id not in (
+select distinct loc_vehicule 
+from location
+where (loc_date_debut < "2019-01-01 00:00:00" and loc_date_fin > "2019-12-30 00:00:00")
+ or (loc_date_debut > "2019-01-01 00:00:00" and  loc_date_debut < "2019-12-30 00:00:00")
+ );
+
+
+ r karim
+ select agc_id, agc_nom, veh_immatriculation from vehicule, agence  where veh_agence=agc_id and veh_id not in (
+select distinct loc_vehicule 
+from location
+where (loc_date_debut > "2019-01-01 00:00:00" and loc_date_fin < "2019-12-30 00:00:00"))
+
+Requête donnant le prix d'une location (hors options sur le véhicule).
+create view loc_duree as 
+
+
+select loc_id,timestampdiff(hour,loc_date_debut,loc_date_fin) duree,veh_categorie
+from location, vehicule
+where loc_vehicule=veh_id
+
+select loc_id, tar_thj*duree prix_hors_option from loc_duree,plage_horaire,tarif where veh_categorie=tar_categorie and pla_id=tar_pla and duree between pla_hmin and pla_hmax
+
+
+Requête donnant le montant total des options attachées à chaque véhicule.
+select  con_location,sum(opt_prix) prixoption from options,contenir where con_options=opt_id group by con_location
+
+
+afficher les véhicules disponible
+select * from vehicule where veh_id not in (select loc_vehicule from location order by veh_id);
+
+calculer le chiffre d'affaire par agence et par département
+create view loc_duree as 
+select loc_id, timestampdiff(hour, loc_date_debut, loc_date_fin) duree from location, vehicule where loc_vehicule=veh_id
+
+select loc_age_depart, duree*tar_thj prixloc from loc_duree, plage_horaire, tarif, agence, location, vehicule  where loc_age_depart=age_id and veh_categorie=tar_id and tar_pla=pla_id and duree between pla_hmin and pla_hmax and loc_statut="Validé" 
+calculer le chiffre d'affaire total
+
+Nombre de location pour diverses durées.
+select count(loc_id) nbrlocation, loc_date_debut, loc_date_fin from location where loc_date_debut=$loc_date_debut and loc_date_fin=$loc_date_fin;
+afficher les véhicules disponibles à l’agence de départ aux dates indiquées, pour la catégorie de véhicule demandé avec les options indiqués
+select * from vehicule, categorie, agence where veh_categorie=cat_id and veh_agence= age_id and cat_id=$cat_id and age_id=$age_id and veh_id not in ( select loc_veh from location)
+afficher les véhicules disponibles à l’agence de départ aux dates indiquées, avec les options indiqués
+afficher les disponibilités des véhicules par agence ou par département en fonction de deux dates indiquées
+select * from vehicule, agence, departement where veh_agence=age_id and age_departement=dep_id and veh_id not in (select loc_veh from location where loc_date_debut=$loc_date_debut and loc_date_fin=$loc_date_fin ) group by dep_code
+afficher les locations par agence de départ
+select * from location, agence where loc_age_depart=age_id and loc_age_depart=$loc_age_depart order by loc_id
+ calculer le chiffre d'affaire par agence
+afficher le prix de la location en fonction de la ctégorie, de la durée et des options demandées
+select cat_nom, loc_date_debut, loc_date_fin, duree*tar_thj prix, sum(opt_prix) from loc_duree,categorie, options, plage_horaire, tarif where tar_categorie =cat_id and tar_pla=pla_id and opt_id=con_options and duree between loc_date_debut and loc_date_fin and loc_date_debut=$loc_date_debut and loc_date_fin=$loc_date_fin and pla_id=tar_pla 
+afficher les locations se terminant aujourd'hui pour son agence d'arrivée
+select * from location, agence  where loc_age_arrivee=age_di and loc_age_arrivee=$loc_age_arrivee and loc_date_fin=now()and loc_statut="Validé"  order by loc_id;
+
+afficher les demandes locations passées ou futures par client
+
+requête passés
+select * from location,client where cli_id=loc_client and loc_statut="Validé" and loc_date_fin<now() and loc_client =$cli_id order by cli_id
+
+
+requête futures
+select * from location,client where cli_id=loc_client and loc_statut="Validé" and loc_date_debut>now() order by cli_id
+
+
+requête en cours
+select * from location,client where cli_id=loc_client and loc_statut="Validé" and now() between loc_date_debut and  loc_date_fin order by cli_id
+
+afficher les véhicules disponibles pour son agence
+select * from vehicule, agence where veh_agence=age_id and veh_agence=$age_idand  veh_id not in (select loc_vehicule from location, vehicule where loc_vehicule=veh_id)
+afficher la liste des locations pour son agence
+select * from location, agence where loc_age_depart=age_id and loc_age_depart=$age_id order by loc_id
+afficher les véhicules disponibles pour toutes les agences
+select * from vehicule, agence where veh_agence=age_id and  veh_id not in (select loc_vehicule from location group by loc_age_depart)
+Calculer le chiffre d’affaire de chaque agence et du groupe, par année, par département.
